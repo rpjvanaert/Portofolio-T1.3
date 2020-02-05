@@ -1,6 +1,8 @@
 # Portofolio Ralf van Aert
 TI1.3 IPR Ralf van Aert
 
+
+#### Delete this, to-do list:
 - Wekelijkse reflectie van eigen bijdrage
     - Les week 2 t/m 9
 - Wekelijkse vakinhoudelijke reflectie
@@ -9,10 +11,17 @@ TI1.3 IPR Ralf van Aert
     - Minstens 1 reflectie op onderzoeksmethodiek
         - Hoe je te werk bent gegaan. Inclusief conclusie en bronvermeldingen
 - Lijst met applicatie die gebruik maken van JSON
+#### Delete this, to do list: ^
+
+
 ## Inhoudsopgave
 <div id="TOC">
 <h3>
-        <a href="#weekly"> Weekelijkse Reflectie</a>
+    <a href="#intro"> Inleiding </a>
+</h3>
+<h3>
+    <a href="#weekly"> Weekelijkse Reflectie</a>
+</h3>
     <ul>
         <li>
             <a href="#week2">Week 2</a>  
@@ -39,7 +48,16 @@ TI1.3 IPR Ralf van Aert
             <a href="#week9">Week 9</a>  
         </li>
     </ul>
+<h3>
+    <a href="#onderzoeksMethodiek"> Reflectie Onderzoeksmethodiek </a>
+</h3>
 </div>
+
+<div id="intro">
+    <h2>
+        <a href="TOC"> Inleiding</a>
+    </h2>
+<div>
 
 <div id="weekly">
     <h2>
@@ -102,4 +120,8 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
 </div>
 
 
-## Reflectie Onderzoeksmethodiek
+<div id="onderzoeksMethodiek">
+    <h2>
+        <a href="TOC">Reflectie Onderzoeksmethodiek</a>
+    </h2>
+</div>
