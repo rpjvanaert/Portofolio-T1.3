@@ -96,36 +96,85 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
         <a href="TOC">Week 3</a>
     </h2>
 </div>
+
+### Reflectie eigen bijdrage
+
+
+### Reflectie technische & vakinhoudelijke bijdrage
+
+
 <div id="week4">
     <h2>
         <a href="TOC">Week 4</a>
     </h2>
 </div>
+
+### Reflectie eigen bijdrage
+
+
+### Reflectie technische & vakinhoudelijke bijdrage
+
+
 <div id="week5">
     <h2>
         <a href="TOC">Week 5</a>
     </h2>
 </div>
+
+### Reflectie eigen bijdrage
+
+
+### Reflectie technische & vakinhoudelijke bijdrage
+
+
 <div id="week6">
     <h2>
         <a href="TOC">Week 6</a>
     </h2>
 </div>
+
+### Reflectie eigen bijdrage
+
+
+### Reflectie technische & vakinhoudelijke bijdrage
+
+
 <div id="week7">
     <h2>
         <a href="TOC">Week 7</a>
     </h2>
 </div>
+
+### Reflectie eigen bijdrage
+
+
+### Reflectie technische & vakinhoudelijke bijdrage
+
+
 <div id="week8">
     <h2>
         <a href="TOC">Week 8</a>
     </h2>
 </div>
+
+### Reflectie eigen bijdrage
+
+
+### Reflectie technische & vakinhoudelijke bijdrage
+
+
 <div id="week9">
     <h2>
         <a href="TOC">Week 9</a>
     </h2>
 </div>
+
+### Reflectie eigen bijdrage
+
+
+### Reflectie technische & vakinhoudelijke bijdrage
+
+
 
 
 <div id="onderzoeksMethodiek">
