@@ -61,6 +61,8 @@ TI1.3 IPR Ralf van Aert
 </ul>
 </div>
 
+---
+
 <div id="intro">
     <h2>
         <a href="TOC"> Inleiding</a>
@@ -89,7 +91,7 @@ Er zijn in de tweede week veel kleine, maar grondige besluiten genomen. Hiervan 
 
 We waren al van plan elke artiest en show een genre te geven, maar we hadden niks gedetaileerd afgesproken. We hadden al besloten om redelijk veel genres te nemen als enumerator. Nu moesten alleen nog bepalen of we hiervan een apart java bestand van maken. Daar hebben we voor gekozen, omdat deze enumerator door verschillende klasses gebruikt gaat worden. Ook zorgt dit voor meer duidelijkheid in de code.
 
-
+---
 
 <div id="week3">
     <h2>
@@ -98,10 +100,23 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
 </div>
 
 ### Reflectie eigen bijdrage
-
+<img src="schedule-Week3-1.png" alt="Schedule Tab Progress" width="400"/>
+<img src="schedule-Week3-2.png" alt="Schedule Tab Progress" width="400"/>
+<img src="schedule-Week3-3.png" alt="Schedule Tab Progress" width="400"/>
+<img src="schedule-Week3-4.png" alt="Schedule Tab Progress" width="400"/>
+<img src="schedule-Week3-5.png" alt="Schedule Tab Progress" width="400"/>
+<img src="schedule-Week3-6.png" alt="Schedule Tab Progress" width="400"/>
 
 ### Reflectie technische & vakinhoudelijke bijdrage
 
+
+Bij een artiest wilde we een afbeelding gebonden, dit werkte niet. We kwamen er niet uit waarom gson/json het niet wilde. Dus hadden we een andere optie; filePath opslaan als string, ik heb dit ontwikkeld, werkend. Alleen deed ook nu helaas de gson/json niet (ook hier stack overflow error).
+
+Hierbij lees je de directory van de map in Resources folder uit, een aparte folder genaamd 'Artist_Images'. De files die eindigen op '.jpg', '.jpeg' of '.png' worden weergegeven als optie in een ComboBox en de geselecteerde optie wordt weergegeven. Ook is er de optie 'None' die de default artiesten afbeelding weergeeft als standaard optie in de ComboBox.
+
+Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als aparte branch te behouden en te werken aan de bugs en ontbrekende features van de agenda module in andere feature branches.
+
+---
 
 <div id="week4">
     <h2>
@@ -114,6 +129,7 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
 
 ### Reflectie technische & vakinhoudelijke bijdrage
 
+---
 
 <div id="week5">
     <h2>
@@ -126,6 +142,7 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
 
 ### Reflectie technische & vakinhoudelijke bijdrage
 
+---
 
 <div id="week6">
     <h2>
@@ -138,6 +155,7 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
 
 ### Reflectie technische & vakinhoudelijke bijdrage
 
+---
 
 <div id="week7">
     <h2>
@@ -150,6 +168,7 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
 
 ### Reflectie technische & vakinhoudelijke bijdrage
 
+---
 
 <div id="week8">
     <h2>
@@ -162,6 +181,7 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
 
 ### Reflectie technische & vakinhoudelijke bijdrage
 
+---
 
 <div id="week9">
     <h2>
@@ -175,7 +195,7 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
 ### Reflectie technische & vakinhoudelijke bijdrage
 
 
-
+---
 
 <div id="onderzoeksMethodiek">
     <h2>
