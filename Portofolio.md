@@ -106,6 +106,7 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
 <img src="schedule-Week3-4.png" alt="Schedule Tab Progress" width="400"/>
 <img src="schedule-Week3-5.png" alt="Schedule Tab Progress" width="400"/>
 <img src="schedule-Week3-6.png" alt="Schedule Tab Progress" width="400"/>
+<img src="schedule-Week3-7.png" alt="Schedule Tab Progress" width="400"/>
 
 ### Reflectie technische & vakinhoudelijke bijdrage
 
