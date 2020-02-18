@@ -82,11 +82,16 @@ Inleiding weekelijkse reflectie
     </h2>
 </div>
 
-#### Reflectie eigen bijdrage
-<img src="scheduleTabExample1.png" alt="Schedule Tab Progress" width="400"/>
+#### **Reflectie eigen bijdrage**
+Bij het verdelen van de rollen is codebeheerder aan mij gegeven, dit is vooral omdat ik nog niet goed met GIT/GIT-Kraken om kan gaan. Op deze manier en met de hulp van mijn groepsleden, hoop ik GIT te leren begrijpen.
+
+Ook hebben we een Plan van Aanpak gemaakt, daarbij heb ik het achtergrond gemaakt en gegevens/opmaak mede-geregeld. Naast dat heb ik ook de Java-Style-Guide opgezet en samen met de rest overlegd over het samenwerkings contract.
+
+Tot slot heb ik de repository opgezet bij GIT-hub, met wat hulp van andere. Ik heb veel problemen gehad met GIT op het begin, maar alles is uiteindelijk verholpen. Ik heb aan de Visual-tab als paar, waarbij ik meedacht. Visual-tab is niet volledig modulair, maar simpel en elegant genoeg om de benodigde variabele snel aan te passen. De visual-tab modulairder te maken is dus ook een toekomstige verbetering die eventueel zou kunnen gebeuren.
+
 <img src="visualTabExample1.png" alt="Visual Tab Progress" width="400"/>
 
-#### Reflectie technische & vakinhoudelijke bijdrage
+#### **Reflectie technische & vakinhoudelijke bijdrage**
 Er zijn in de tweede week veel kleine, maar grondige besluiten genomen. Hiervan ga ik er een paar beschrijven waaraan ik heb mee gedacht met beredenering.
 
 We waren al van plan elke artiest en show een genre te geven, maar we hadden niks gedetaileerd afgesproken. We hadden al besloten om redelijk veel genres te nemen als enumerator. Nu moesten alleen nog bepalen of we hiervan een apart java bestand van maken. Daar hebben we voor gekozen, omdat deze enumerator door verschillende klasses gebruikt gaat worden. Ook zorgt dit voor meer duidelijkheid in de code.
@@ -99,16 +104,49 @@ We waren al van plan elke artiest en show een genre te geven, maar we hadden nik
     </h2>
 </div>
 
-### Reflectie eigen bijdrage
+### **Reflectie eigen bijdrage**
 <img src="schedule-Week3-1.png" alt="Schedule Tab Progress" width="400"/>
 <img src="schedule-Week3-2.png" alt="Schedule Tab Progress" width="400"/>
 <img src="schedule-Week3-3.png" alt="Schedule Tab Progress" width="400"/>
+
+Deze week heb ik aan het begin veel meegedacht aan de problemen van schedule tab,
+maar naast dat veel testen en kleine features verfijnen en maken. Ik heb ook gewerkt aan de artiesten afbeelding keuze optie, maar dit is niet door gegaan.
+Dit kwam doordat, beide javax.json en google.gson de afbeeldingen niet wilde opslaan.
+
 <img src="schedule-Week3-4.png" alt="Schedule Tab Progress" width="400"/>
+
+Naast dat heb ik de (mijn mening vreselijke) paarse kleurpallet aangepast naar lichtblauw en grijs, dit ziet er veel rustiger uit. Ook heb ik de window groter gemaakt met de daar nodige aanpassingen aan schedule tab en visual tab. De show en artiesten beschrijving weergave (die weergeeft de geselecteerde show met bijhorende artiest(en)) was het mogelijk om horizontaal te scrollen, dit is eruit gehaald inclusief andere verhoudingen tussen de TextArea's.
+
+Ik heb de show beschrijving van een TextArea omgezet naar een TextFlow. De bijhorende code;
+            
+    VBox descriptionBase = new VBox();
+    descriptionBase.getChildren().add(new Label("Show:"));
+    TextFlow showDescriptionTextFlow = new TextFlow();
+
+    Text textTitle = new Text(this.selectedItem.getName());
+    textTitle.setStyle("-fx-font-weight: bold; -fx-font-size: 40");
+
+    Text textDescrTitle = new Text("\n\n Show Description:");
+    textDescrTitle.setStyle("-fx-font-weight: bold;");
+
+    Text textDescription = new Text("\n" + this.selectedItem.getDescription());
+    showDescriptionTextFlow.getChildren().addAll(textTitle, textDescrTitle, textDescription);
+    showDescriptionTextFlow.setMaxWidth(450);
+
+Zoals je in de code kan zien, stop ik Text een TextFlow object. De Text klasse geeft de mogelijkheid om de text **dik-gedrukt** te krijgen. Ook is de TextFlow de maximale breedte meegegeven, hier zonder variabele nog, als magicnumber.
+
 <img src="schedule-Week3-5.png" alt="Schedule Tab Progress" width="400"/>
+
+In de afbeelding hierboven is weer te zien hoe de kleuren zijn geworden. Voor de rest zijn er kleine aanpassingen gedaan, zoals de window bij het toevoegen en aanpassen van shows was nog resizable, wat dus niet meer is.
+
 <img src="schedule-Week3-6.png" alt="Schedule Tab Progress" width="400"/>
 <img src="schedule-Week3-7.png" alt="Schedule Tab Progress" width="400"/>
 
-### Reflectie technische & vakinhoudelijke bijdrage
+De laatste afbeelding van de schedule tab is de uiteindelijke geworden voor de demo bij de senior. ten slot de weergave van visual-tab hieronder, een canvas in een scrollpane, hier heb ik zelf niet aan gewerkt, maar wel aangepast bij het groter maken van de applicatie window.
+
+<img src="visual-Week3-1.png" alt="Visual Tab Progress" width="400"/>
+
+### **Reflectie technische & vakinhoudelijke bijdrage**
 
 
 Bij een artiest wilde we een afbeelding gebonden, dit werkte niet. We kwamen er niet uit waarom gson/json het niet wilde. Dus hadden we een andere optie; filePath opslaan als string, ik heb dit ontwikkeld, werkend. Alleen deed ook nu helaas de gson/json niet (ook hier stack overflow error).
@@ -125,10 +163,10 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
     </h2>
 </div>
 
-### Reflectie eigen bijdrage
+### **Reflectie eigen bijdrage**
 
 
-### Reflectie technische & vakinhoudelijke bijdrage
+### **Reflectie technische & vakinhoudelijke bijdrage**
 
 ---
 
@@ -138,10 +176,10 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
     </h2>
 </div>
 
-### Reflectie eigen bijdrage
+### **Reflectie eigen bijdrage**
 
 
-### Reflectie technische & vakinhoudelijke bijdrage
+### **Reflectie technische & vakinhoudelijke bijdrage**
 
 ---
 
@@ -151,10 +189,10 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
     </h2>
 </div>
 
-### Reflectie eigen bijdrage
+### **Reflectie eigen bijdrage**
 
 
-### Reflectie technische & vakinhoudelijke bijdrage
+### **Reflectie technische & vakinhoudelijke bijdrage**
 
 ---
 
@@ -164,10 +202,10 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
     </h2>
 </div>
 
-### Reflectie eigen bijdrage
+### **Reflectie eigen bijdrage**
 
 
-### Reflectie technische & vakinhoudelijke bijdrage
+### **Reflectie technische & vakinhoudelijke bijdrage**
 
 ---
 
@@ -177,10 +215,10 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
     </h2>
 </div>
 
-### Reflectie eigen bijdrage
+### **Reflectie eigen bijdrage**
 
 
-### Reflectie technische & vakinhoudelijke bijdrage
+### **Reflectie technische & vakinhoudelijke bijdrage**
 
 ---
 
@@ -190,10 +228,10 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
     </h2>
 </div>
 
-### Reflectie eigen bijdrage
+### **Reflectie eigen bijdrage**
 
 
-### Reflectie technische & vakinhoudelijke bijdrage
+### **Reflectie technische & vakinhoudelijke bijdrage**
 
 
 ---
