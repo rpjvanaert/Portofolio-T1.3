@@ -118,7 +118,8 @@ Dit kwam doordat, beide javax.json en google.gson de afbeeldingen niet wilde ops
 Naast dat heb ik de (mijn mening vreselijke) paarse kleurpallet aangepast naar lichtblauw en grijs, dit ziet er veel rustiger uit. Ook heb ik de window groter gemaakt met de daar nodige aanpassingen aan schedule tab en visual tab. De show en artiesten beschrijving weergave (die weergeeft de geselecteerde show met bijhorende artiest(en)) was het mogelijk om horizontaal te scrollen, dit is eruit gehaald inclusief andere verhoudingen tussen de TextArea's.
 
 Ik heb de show beschrijving van een TextArea omgezet naar een TextFlow. De bijhorende code;
-            
+
+ ```java     
     VBox descriptionBase = new VBox();
     descriptionBase.getChildren().add(new Label("Show:"));
     TextFlow showDescriptionTextFlow = new TextFlow();
@@ -132,6 +133,8 @@ Ik heb de show beschrijving van een TextArea omgezet naar een TextFlow. De bijho
     Text textDescription = new Text("\n" + this.selectedItem.getDescription());
     showDescriptionTextFlow.getChildren().addAll(textTitle, textDescrTitle, textDescription);
     showDescriptionTextFlow.setMaxWidth(450);
+```
+
 
 Zoals je in de code kan zien, stop ik Text een TextFlow object. De Text klasse geeft de mogelijkheid om de text **dik-gedrukt** te krijgen. Ook is de TextFlow de maximale breedte meegegeven, hier zonder variabele nog, als magicnumber.
 
@@ -149,7 +152,7 @@ De laatste afbeelding van de schedule tab is de uiteindelijke geworden voor de d
 ### **Reflectie technische & vakinhoudelijke bijdrage**
 
 
-Bij een artiest wilde we een afbeelding gebonden, dit werkte niet. We kwamen er niet uit waarom gson/json het niet wilde. Dus hadden we een andere optie; filePath opslaan als string, ik heb dit ontwikkeld, werkend. Alleen deed ook nu helaas de gson/json niet (ook hier stack overflow error).
+Bij een artiest wilde we een afbeelding gebonden, dit werkte niet. We kwamen er niet uit waarom gson/json het niet wilde. Dus hadden we een andere optie; filePath opslaan als string, ik heb dit ontwikkeld, werkend. Alleen deed ook nu helaas de gson/json niet (ook hier stack overflow error). Deze error verwees alleen naar de gson library en niet naar een lijn in de code. Johan Talboom heeft hier ook naar gekeken en kwam er ook niet uit.
 
 Hierbij lees je de directory van de map in Resources folder uit, een aparte folder genaamd 'Artist_Images'. De files die eindigen op '.jpg', '.jpeg' of '.png' worden weergegeven als optie in een ComboBox en de geselecteerde optie wordt weergegeven. Ook is er de optie 'None' die de default artiesten afbeelding weergeeft als standaard optie in de ComboBox.
 
@@ -165,6 +168,9 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
 
 ### **Reflectie eigen bijdrage**
 
+-[x] Checkbox 1
+-[ ] Checkbox 2
+-[ ] Checkbox 3
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
 
