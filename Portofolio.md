@@ -168,9 +168,9 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
 
 ### **Reflectie eigen bijdrage**
 
--[x] Checkbox 1
--[ ] Checkbox 2
--[ ] Checkbox 3
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
 
