@@ -1,5 +1,7 @@
 # Portofolio Ralf van Aert
-TI1.3 IPR Ralf van Aert
+TI1.3 IPR Ralf van Aert\
+Studentennummer: 2163995\
+E-mail: <rpj.vanaert@student.avans.nl>
 
 
 #### Delete this, to-do list:
@@ -168,9 +170,6 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
 
 ### **Reflectie eigen bijdrage**
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
 
