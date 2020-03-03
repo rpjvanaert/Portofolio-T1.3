@@ -171,8 +171,12 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
 
 ### **Reflectie eigen bijdrage**
 
+- TestCaseDiagram en testen Schedule tab
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
+
+- Constraints over Stages, de hoeveelheid op de map en capacity
+
 
 ---
 
