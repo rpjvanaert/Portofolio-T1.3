@@ -171,11 +171,9 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
 
 ### **Reflectie eigen bijdrage**
 
-- TestCaseDiagram en testen Schedule tab
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
 
-- Constraints over Stages, de hoeveelheid op de map en capacity
 
 ---
 
@@ -185,6 +183,33 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
     </h2>
 </div>
 
+### **Reflectie eigen bijdrage**
+
+- TestCaseDiagram en testen Schedule tab
+
+### **Reflectie technische & vakinhoudelijke bijdrage**
+
+- Constraints over Stages, de hoeveelheid op de map en capacity
+
+<img src="testcaseDaigram.jpeg" alt="Test Case Diagram" height="400"/>
+
+j
+
+<img src="testcaseDaigramDetails.png" alt="Test Case Diagram description edit show" width="400"/>
+
+j
+
+<img src="testcaseDaigramDetails2.png" alt="Test Case Diagram description delete artist" width="400"/>
+
+j
+
+---
+
+<div id="week6">
+    <h2>
+        <a href="TOC">Week 6</a>
+    </h2>
+</div>
 ### **Reflectie eigen bijdrage**
 
 - CameraTransform
@@ -308,19 +333,6 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
         }
     }
 ```
-
----
-
-<div id="week6">
-    <h2>
-        <a href="TOC">Week 6</a>
-    </h2>
-</div>
-
-### **Reflectie eigen bijdrage**
-
-
-### **Reflectie technische & vakinhoudelijke bijdrage**
 
 ---
 
