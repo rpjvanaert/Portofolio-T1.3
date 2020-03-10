@@ -177,7 +177,6 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
 
 - Constraints over Stages, de hoeveelheid op de map en capacity
 
-
 ---
 
 <div id="week5">
@@ -188,8 +187,127 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
 
 ### **Reflectie eigen bijdrage**
 
+- CameraTransform
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
+Deze week heb ik aan het CameraTransform gewerkt, dit is gemaakt door de Canvas Node mee te geven in de constructor. Vervolgens worden er de nodige setOnAction events gezet met de handling die nodig is.
+
+Bij elke muisklik wordt de lastMousePos daarop gezet. Het slepen wordt gedaan met de scroll knop, de middelste muisknop. De nieuwe originReplacePos, de verplaatsing vanaf het oorspronkelijke nulpunt, is de oude originReplacePos + het verschil tussen de lastMousePos en de event positie.
+
+Dat was voor het slepen, naast dat wordt om het scrollen in verhouding met fysieke scroll goed te krijgen de detlaY van de scroll omgerekend naar zoom.
+```java
+ public CameraTransform(Canvas node){
+        //Default zoom and originReplacePos; no zoom and originReplacePos default to origin.
+        this.zoom = 1.0;
+        this.originReplacePos = new Point2D.Double(0,0);
+
+        //Sets zoom on scroll to according zoom value in correlation with deltaY.
+        node.setOnScroll(event -> {
+            zoom *= (1 + event.getDeltaY()/150.0f);
+        });
+
+        //Replaces originReplacePos on mouse dragging with the middle mouse button(scroll button press-in)
+        //New originReplacePos is the old replace position with the difference of the lastMousePos and the current mouse positions
+        //Zoom is calculated in it with the mouse positions
+        node.setOnMouseDragged(event -> {
+            if (event.getButton() == MouseButton.MIDDLE){
+                originReplacePos = new Point2D.Double(
+                        originReplacePos.getX() + (event.getX() - lastMousePos.getX()) / zoom,
+                        originReplacePos.getY() + ( event.getY() - lastMousePos.getY()) / zoom
+                );
+            }
+            lastMousePos = new Point2D.Double(event.getX(), event.getY());
+        });
+
+        //Sets lastMousePos on any mouse button pressed
+        node.setOnMousePressed(event -> lastMousePos = new Point2D.Double(event.getX(), event.getY()));
+        this.canvas = node;
+    }
+```
+Bij elke draw wordt de CameraTransform gevraagd voor de Transform van de FXGraphics2D. Deze is afhankelijk van de veranderde originReplacePos en zoom bij de setOnAction events. De inverseTransform wordt opgeslagen als attribuut voor de vertaling van scherm naar canvas.
+
+Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator klasse om de plaats van de muis te bepalen t.o.v. de translaties en scaling die gedaan is.
+
+
+```java
+ AffineTransform inverseTransform;
+
+    /***
+     * getTransform
+     *
+     * Calculates the CameraTransform with the zoom en replaceOriginPos that has been tracked.
+     * Also saves inverse transformation in inverseTransform.
+     *
+     * @return AffineTransform: CameraTransform
+     */
+    public AffineTransform getTransform(){
+        if (originReplacePos != null){
+            AffineTransform tx = new AffineTransform();
+            tx.scale(zoom, zoom);
+            tx.translate(originReplacePos.getX(), originReplacePos.getY());
+            try {
+                this.inverseTransform = tx.createInverse();
+            } catch (NoninvertibleTransformException e) {
+                e.printStackTrace();
+            }
+            return tx;
+        } else {
+            return new AffineTransform();
+        }
+    }
+
+    /***
+     * getRelPoint2D
+     *
+     * returns the relative Point2D object that is correct with the camera transformation that has been done,
+     * for the x and y given in the parameters.
+     *
+     * @param x
+     * @param y
+     * @return Point2D
+     */
+    public Point2D getRelPoint2D(double x, double y){
+        Point2D.Double relP2D = new Point2D.Double(x * inverseTransform.getScaleX() + inverseTransform.getTranslateX(), y * inverseTransform.getScaleY() + inverseTransform.getTranslateY());
+        return relP2D;
+    }
+```
+  In de draw methode van de simulator klasse, wordt de originReplacePos opgevraagt om de clearRect te bepalen. Ook wordt de Zoom daarvoor gevraagd, wat de juiste schaling geeft.
+
+  Voor de rest is er voor test redenen een optie om met de rechter muisknop te togglen tussen CameraTransform en geen CameraTransform. De transform wordt gewoon door middel van een getter opgevraagd zoals bij vorige blok code gegeven.
+```java
+/***
+     * draw
+     *
+     * clearRect and sets background.
+     * Applies the according transformation
+     * Handles persons
+     *
+     * @param g2
+     */
+    public void draw(FXGraphics2D g2) {
+        //Gets right originReplacePos and zoom, applies the originReplacePos and zoom(scaling) to get right clearRect
+        Point2D p2d = this.cameraTransform.getOriginReplacePos();
+        double zoom = cameraTransform.getZoom();
+        g2.clearRect(-(int)p2d.getX(), -(int)p2d.getY(), (int) (canvas.getWidth() / zoom), (int) (canvas.getHeight() / zoom));
+
+        //Depending on show mode, shows does or doesn't show cameraTransform
+        if (!this.showNull){
+            g2.setTransform(this.cameraTransform.getTransform());
+        } else {
+            g2.setTransform(new AffineTransform());
+        }
+        //White background and black rectangle for clarity
+        g2.setBackground(Color.WHITE);
+        Shape rect = new Rectangle2D.Double(0, 0, 2500, 2500);
+        g2.setPaint(Color.BLACK);
+        g2.draw(rect);
+
+        //Draws every person
+        for (Person person : people) {
+            person.draw(g2);
+        }
+    }
+```
 
 ---
 
