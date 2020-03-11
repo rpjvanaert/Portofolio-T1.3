@@ -170,11 +170,74 @@ Omdat dit uiteindelijk niet werkte hebben we uiteindelijk besloten om dit als ap
 </div>
 
 ### **Reflectie eigen bijdrage**
+Deze week hebben we verder gewerkt aan het Plan van Aanpak, dit is geen onderdeel van het project, maar hier hebben we wel aangewerkt als project groep.
 
+Naast dat moest er een map ingeladen worden deze week. We hebben een voorbeeld map gemaakt met behulp van Tiled. Daarmee hebben we een map gemaakt, deze map kan door Tiled opgeslagen worden als JSON file. Zie hiervoor technische & vakinhoudelijke bijdrage. De map wordt ingeladen per laag dit hoeft alleen bij initialisatie.
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
+Hieronder is aangegeven in code hoe de eerste poging to map uitlezen ging. Uiteindelijk zijn anderen van mijn project groep hiermee verder gegaan. Die kregen een andere structuur in hun json file, maar het gebeurt met hetzelfde idee.
+Deze code is modulair voor verschillende TileMaps, als deze maar hetzelfde structuur hebben.
+
+Bij de constructor van Map, wordt eerst het JSON bestand uitgelezen naar hoogte en breedte, waarne de map, integer matrix, wordt opgesteld met de bijbehorende index voor elke subimage.
+
+Nadat de TileSet waarvan gebruik is gemaakt in de JSON bestand gelezen, en deze op de juiste volgorde in een ArrayList met opslag type BufferedImage gestopt. De tile hoogte en breedte worden hier uitgelezen van het JSON bestand, ook hier weer modulair in verhouding met de TileMap.
+```java
+public Map(String fileName) {
+        JsonReader reader = null;
+        reader = Json.createReader(getClass().getResourceAsStream(fileName));
+        JsonObject root = reader.readObject();
+
+        this.width = root.getJsonArray("layers").getJsonObject(0).getInt("width");
+        this.height = root.getJsonArray("layers").getJsonObject(0).getInt("height");
+
+        this.map = new int[this.height][this.width];
+        for (int y = 0; y < this.height; y++) {
+
+            for (int x = 0; x < this.width; x++) {
+
+                int i = x + y * 32;
+                int adding = root.getJsonArray("layers").getJsonObject(0).getJsonArray("data").getInt(i);
+                this.map[y][x] = adding;
+            }
+        }
+
+        try {
+            BufferedImage tilemap = ImageIO.read(getClass().getResourceAsStream(root.getJsonArray("tilesets").getJsonObject(0).getString("image")));
+
+            this.tileHeight = root.getJsonArray("tilesets").getJsonObject(0).getInt("tileheight");
+            this.tileWidth = root.getJsonArray("tilesets").getJsonObject(0).getInt("tilewidth");
+
+            for (int y = 0; y < tilemap.getHeight(); y += this.tileHeight) {
+
+                for (int x = 0; x < tilemap.getWidth(); x += this.tileWidth) {
+                    this.tiles.add(tilemap.getSubimage(x, y, this.tileWidth, this.tileHeight));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+```
+Als de map getekend moet worden, wordt de volgende draw functie opgeroepen. De draw methode gaat door de integer matrix map met 2 for-loops en tekent de bijbehorende subimage voor de tile op de juiste plek.
+
+```java
+public void draw(Graphics2D g2d) {
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (map[y][x] < 0)
+                    continue;
+                
+                g2d.drawImage(
+                        this.tiles.get(map[y][x] - 1),
+                        AffineTransform.getTranslateInstance(x*tileWidth, y*tileHeight),
+                        null);
+            }
+        }
 
 
+    }
+```
 ---
 
 <div id="week5">
