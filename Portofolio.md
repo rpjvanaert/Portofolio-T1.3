@@ -405,6 +405,9 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
     </h2>
 </div>
 
+- CameraTransform insight
+- TileMap saving as BufferedImage.
+
 ### **Reflectie eigen bijdrage**
 
 
