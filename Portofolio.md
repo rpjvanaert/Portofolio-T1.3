@@ -423,22 +423,12 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
 
 ### **Reflectie eigen bijdrage**
 
+- CameraTransform
+- Test
+- Start Time Simulator
+- Settings fix
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
-
----
-
-<div id="week9">
-    <h2>
-        <a href="TOC">Week 9</a>
-    </h2>
-</div>
-
-### **Reflectie eigen bijdrage**
-
-
-### **Reflectie technische & vakinhoudelijke bijdrage**
-
 
 ---
 
