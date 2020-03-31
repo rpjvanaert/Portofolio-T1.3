@@ -427,6 +427,7 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
 - Test
 - Start Time Simulator
 - Settings fix
+- NightLayer
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
 
@@ -439,6 +440,7 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
 
 ### **Reflectie eigen bijdrage**
 
+- NightLayer Fade (/100.0f en 2.0f/3.0f)
 
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
