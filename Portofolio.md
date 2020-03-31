@@ -441,6 +441,11 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
 ### **Reflectie eigen bijdrage**
 
 - NightLayer Fade (/100.0f en 2.0f/3.0f)
+- fix resetSet
+- fix saveSettings
+- fix simulatorSpeed(savesettings)
+- DataController.getInstance singleton
+- Poging tot MapDataController.getInstance singleton, maar tevergeefs
 
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
