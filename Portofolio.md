@@ -53,7 +53,7 @@ E-mail: <rpj.vanaert@student.avans.nl>
                 <a href="#week8">Week 8</a>  
             </li>
             <li>
-                <a href="#week9">Week 9</a>  
+                <a href="#week9">Week 9</a>
             </li>
         </ul>
     <li>
@@ -431,9 +431,32 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
 
 ---
+<div id="week9">
+    <h2>
+        <a href="TOC">Week 9</a>
+    </h2>
+</div>
+
+### **Reflectie eigen bijdrage**
+
+
+
+### **Reflectie technische & vakinhoudelijke bijdrage**
+
+---
 
 <div id="onderzoeksMethodiek">
     <h2>
         <a href="TOC">Reflectie Onderzoeksmethodiek</a>
     </h2>
 </div>
+
+
+### **Applicaties met JSON gebruik**
+#### Minecraft ####
+De JSON data structuur die gebruikt wordt door veel verschillende applicaties. Een goed voorbeeld hiervan is Minecraft. Minecraft gebruikt JSON-bestanden om commands uit te lezen, modellen geluiden en UI. JSON-bestanden worden voor nog meer dingen gebruikt in Minecraft, zoals bijvoorbeeld Achievements en Statistics.
+
+#### JSON Web Tokens (JWT)
+JSON Web Tokens is een methode om veilig, compact en alles-bevatend informatie over te sturen via een JSON object. Dit wordt gedaan door bijvoorbeeld te beveiligen met een gebruikersnaam en wachtwoord, dit wordt heel veel gebruikt.
+
+Bij validatie van de combinatie gebruikersnaam en wachtwoord zal de applicatie een token creeëren met de informatie en een geheime sleutel. De token wordt vervolgens gestuurd naar de gebruiker. Daarna zo gauw de gebruiker dan een aanvraag stuurt met die token, zal de applicatie de token valideren met dezelfde sleutel, als dit klopt, neemt de applicatie de aanvraag aan.
