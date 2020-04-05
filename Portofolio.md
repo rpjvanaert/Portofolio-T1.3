@@ -405,13 +405,24 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
     </h2>
 </div>
 
-- CameraTransform insight
-- TileMap saving as BufferedImage.
-
 ### **Reflectie eigen bijdrage**
 
+Deze week was er niet veel aan de gang voor mij. Ik heb uiteindelijk de kleine taken genomen, CameraTransform werkte niet en de simulator was langzaam. Nadat wij wat hebben gekeken en nagedacht, bedachten wij dat dit (mede) door het tekenen van de map komt. De map werdt elke keer opnieuw getekend, elke tile en tileLayer apart. Ik heb dus samen met Lars een functie gemaakt die de map 1 keer opslaat en daarna opslaat als bufferedImage.
+
+Er is niet veel aan CameraTransform verandert, naast wat refacoren en wat willekeurige testjes. Zoomen naar muis lukt niet.
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
+Voor het implementeren van het opslaan van BufferedImage voor de map, hebben wij gebruik gemaakt van java.awt.Graphics. Je kan de Graphics object krijgen vanuit een BufferedImage en je kan vervolgens in het Graphics Object tekenen, ook afbeeldingen, vergelijkbaar met FXGraphics2D. Het tekenen van de map gaat voor de rest hetzelfde, alleen dan met Graphics i.p.v. FXGraphics2D.
+```
+Graphics graphics;
+
+        dayImage = new BufferedImage(MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE, BufferedImage.TYPE_INT_RGB);
+        graphics = dayImage.getGraphics();
+
+        for (TiledLayer tiledLayer : tiledLayers) {
+            tiledLayer.drawG(graphics);
+        }
+```
 
 ---
 
@@ -423,13 +434,79 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
 
 ### **Reflectie eigen bijdrage**
 
-- CameraTransform
-- Test
-- Start Time Simulator
-- Settings fix
-- NightLayer
+In week 8 is veel gebeurt, veel kleine aanpassingen, de grootste aanpassingen zijn het werkend krijgen van CameraTransform met Arne, veel tests, het instellen van de begin tijd simulator, SettingsTab fix en nightLayer.
+
+De NightLayer bestaat uit 2 lagen die Erwin heeft toegevoegd. Darkness en Lights (id 7 & 8). Het instellen van de begin tijd simulator gebeurt een half uur voor het begin van de eerste show, tenzij de show om 0:00 uur begint, dan begint het ook om 0:00 uur. Dit kan overwrite worden door de settings, waar later nog op terug wordt gekomen, dit bevat de SettingsTab fix. Dit zal worden samengevat worden in week 9.
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
+
+Het uitlezen van de lagen wordt om de nightLayer te realiseren gedaan en opgeslagen in 2 aparte ArrayList\<TileLayer>'s, 1 voor nightLayer en 1 voor dayLayer.
+
+```
+for (JsonObject layerJsonObject : layersJsonArray.getValuesAs(JsonObject.class)) {
+                if (layerJsonObject.getJsonString("name").toString().equals("Walkable")) {
+                    populateWalkableMap(layerJsonObject);
+
+                } else if (layerJsonObject.getJsonString("type").toString().equals("objectgroup")) {
+                    populateTargetAreas(layerJsonObject);
+
+                } else if (layerJsonObject.getBoolean("visible"))
+                    // Adds darkness and light layer
+                    if (layerJsonObject.getInt("id") == 7 || layerJsonObject.getInt("id") == 8) {
+                        tiledLayersNight.add(new TiledLayer(tiledMapImage, layerJsonObject));
+                    } else tiledLayers.add(new TiledLayer(tiledMapImage, layerJsonObject));
+            }
+```
+
+Vervolgens wordt deze beide ArrayLists apart opgeslagen in een BufferedImage zoals besproken in week 7. Eerst was het geval dat je een aparte afbeelding had met alle lagen voor nacht en de afbeelding voor dag, zonder de 2 lagen, maar er was later besloten dat wij een fade in onze simulator wilde hebben, dus is er een aparte laag van gemaakt.
+
+
+```
+Graphics graphics;
+
+        dayImage = new BufferedImage(MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE, BufferedImage.TYPE_INT_RGB);
+        graphics = dayImage.getGraphics();
+
+        for (TiledLayer tiledLayer : tiledLayers) {
+            tiledLayer.drawG(graphics);
+        }
+
+        nightLayerImage = new BufferedImage(MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE, BufferedImage.TYPE_INT_RGB);
+        graphics = nightLayerImage.getGraphics();
+
+        for (TiledLayer tiledLayer : tiledLayersNight) {
+            tiledLayer.drawG(graphics);
+        }
+```
+
+Hieronder is vervolgens te zien hoe de fade wordt berekend en hoe (en dat) de nightLayer met opacity getekend wordt. Wij hebben gekozen voor (in iedergeval) een cap op de opacity tot 0.7f, hierna wordt het onrealistisch donker en onduidelijk voor de gebruiker. Erwin had de 2 vergelijkingen opgesteld voor het faden en na wat kleine aanpassingen zijn wij op deze voorkeur gekomen.
+
+```
+double timeHours;
+        timeHours = clockReference.getHours();
+        timeHours += clockReference.getMinutes() / 60.0;
+
+        float opacity;
+
+        if (timeHours >= 14) {
+            opacity = (float) ((2.0f / 3.0f) * Math.pow((timeHours - 4), 2) - (float) (38 / 3) * (float) (timeHours - 4) + 55) / 100.0f;
+        } else {
+            opacity = (float) ((25.0f / 84.0f) * Math.pow(timeHours, 2) - (float) (355 / 42) * (float) timeHours + 60) / 100.0f;
+        }
+
+        if (opacity < 0) {
+            opacity = 0f;
+        } else if (opacity > 0.7f) {
+            opacity = 0.7f;
+        }
+
+        for (Person person : people)
+            person.draw(g);
+
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+        g.drawImage(MapDataController.getNightLayerImage(), 0, 0, null);
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+```
 
 ---
 <div id="week9">
@@ -440,16 +517,82 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
 
 ### **Reflectie eigen bijdrage**
 
-- NightLayer Fade (/100.0f en 2.0f/3.0f)
-- fix resetSet
-- fix saveSettings
-- fix simulatorSpeed(savesettings)
-- DataController.getInstance singleton
-- Poging tot MapDataController.getInstance singleton, maar tevergeefs
+Dit is de laatste week van het project, de laatste dingen afronden, TO-DO list steeds kleiner.
 
+Aan het begin van de week hebben Erwin en ik nog de NightLayer Fade verder werkend gekregen en afgerond.
+Vervolgens heb ik gewerkt aan de saveSettings (en resetSimulator) knop. De veranderingen maakte in dat de simulator reset wanneer er op deze knop wordt gedruk alleen als er een instelling van simulator is verandert dat geen SimulatorSpeed is. Bij het simulatorSpeed veranderen, verandert de snelheid daadwerkelijk, maar wordt de Simulator niet overnieuw geïnitialiseerd.
+
+Voor de rest heb ik en Arne aan het singleton patroon gewerkt, hiermee had Arne al een begin mee gemaakt voor DataController, maar nog niet overal geïmplementeerd, al verliep dit niet lekker met GitKraken, heb ik hier wel mee geholpen. Ik heb ook geprobeerd het singleton patroon te implementeren bij MapDataController, maar dit was tevergeefs. Na een half uur kwamen wij erachter dat elke TiledLayer, TiledTile, etc. opgeroepen werdt vanuit de MapDataController, besloten wij ermee te stoppen aangezien de complexiteit en wij geen ideeën meer hadden voor een oplossing. 
+
+Naast dat hebben wij nog de presentatie over heel het projectgroepje verdeeld, presentatie gemaakt en de presentatie tekst. Hierbij heb ik de koppen Ontwerp Layout en Code afspraken gekregen. Naast dat doe ik samen met Erwin de demo, zo hebben we afgesproken.
 
 ### **Reflectie technische & vakinhoudelijke bijdrage**
 
+Het probleem met de SaveSettings button en ResetSimulator button was dat het niet helemaal lekker werkte en dat heel de simulator opnieuw moest starten als je alleen de SimulatorSpeed tijdelijk wilt veranderen.
+
+De reset button is als hieronder weergegeven. Deze laat DataController settings opnieuw lezen. Dit is meer om de Clock te resetten dan iets anders in te laden van de Settings.
+
+```
+//Save button
+        Button saveButton = new Button("Save settings");
+        saveButton.setOnAction(event -> saveSettings());
+
+        //Reset simulator
+        Button resetButton = new Button("Reset simulator");
+        resetButton.setOnAction(event -> {
+            DataController.getInstance().readSettings();
+            GUI.getSimulatorTab().getSimulator().init();
+        });
+```
+
+Vervolgens de logica rond saveSettings, die grotendeels gedaan is door Lars. Hierin heb sla ik eerst de oude settings op en elke aparte setting in de SettingTab als variabel. Vervolgens worden de settings in het json bestand geschreven. Ten aller laatst wordt er met een if statement gekeken of er iets anders is verandert dan simulatorSpeed, zo niet past het alleen de simulatorSpeed aan. Zo wel dan komt er een init, waardoor de simulator volledig overnieuw begint vanuit de nieuwe settings.
+```
+/**
+     * Saves the applied settings of the simulator to a Jsonfile
+     */
+    private void saveSettings() {
+        //gets Settings from DataController and reads settingsTab chosen fields.
+        Settings settings = DataController.getInstance().getSettings();
+        double simSpeed = speedSlider.getValue();
+        double visPerNPC = NPCAmountSlider.getValue();
+        boolean predic = prediction.isSelected();
+        int beginTimeHours = Integer.parseInt(beginTime.getValue().toString().substring(0, 2));
+        int beginTimeMinutes = Integer.parseInt(beginTime.getValue().toString().substring(3, 5));
+        boolean overwriteTime = overwriteStartTime.isSelected();
+
+        // writes settings into JSON file settings.json
+        try (JsonWriter writer = Json.createWriter(new FileWriter(this.saveFileName))) {
+            JsonObjectBuilder settingsBuilder = Json.createObjectBuilder();
+            settingsBuilder.add("Simulator Speed", simSpeed + "");
+            settingsBuilder.add("Visitors per NPC", visPerNPC);
+            settingsBuilder.add("Is Using Prediction", predic);
+            settingsBuilder.add("Begin hours", beginTimeHours);
+            settingsBuilder.add("Begin minutes", beginTimeMinutes);
+            settingsBuilder.add("Use overwrite time", overwriteTime);
+            writer.writeObject(settingsBuilder.build());
+            writer.close();
+
+            // sets simulatorSpeed and if something else has changed, inits simulator and sets time.
+            DataController.getInstance().getClock().setSimulatorSpeed(simSpeed);
+            if(
+                    overwriteTime != settings.isOverwriteStartTime() ||
+                            visPerNPC != settings.getVisitors() ||
+                            predic != settings.isUsingPredictedPerson() ||
+                            beginTimeHours != settings.getBeginHours() ||
+                            beginTimeMinutes != settings.getBeginMinutes()
+            ) {
+                GUI.getSimulatorTab().getSimulator().init();
+                DataController.getInstance().getClock().setTime(beginTimeHours, beginTimeMinutes, 0);
+            }
+
+            // DataController update Settings
+            DataController.readSettings();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+```
 ---
 
 <div id="onderzoeksMethodiek">
@@ -463,7 +606,7 @@ Dat wordt gedaan bij getRelPoint2D, deze methode wordt gebruikt in de simulator 
 #### Minecraft ####
 De JSON data structuur die gebruikt wordt door veel verschillende applicaties. Een goed voorbeeld hiervan is Minecraft. Minecraft gebruikt JSON-bestanden om commands uit te lezen, modellen geluiden en UI. JSON-bestanden worden voor nog meer dingen gebruikt in Minecraft, zoals bijvoorbeeld Achievements en Statistics.
 
-#### JSON Web Tokens (JWT)
+#### JSON Web Tokens (JWT) [link](https://jwt.io/introduction/)
 JSON Web Tokens is een methode om veilig, compact en alles-bevatend informatie over te sturen via een JSON object. Dit wordt gedaan door bijvoorbeeld te beveiligen met een gebruikersnaam en wachtwoord, dit wordt heel veel gebruikt.
 
 Bij validatie van de combinatie gebruikersnaam en wachtwoord zal de applicatie een token creeëren met de informatie en een geheime sleutel. De token wordt vervolgens gestuurd naar de gebruiker. Daarna zo gauw de gebruiker dan een aanvraag stuurt met die token, zal de applicatie de token valideren met dezelfde sleutel, als dit klopt, neemt de applicatie de aanvraag aan.
